@@ -1,6 +1,7 @@
 # Modified Easy Google Fonts plugin
 Find all information on the original EGF plugin below. This version has been modified to allow some additional customizations by theme developers.
-Modified by: [mngarwood](http://www.megangarwood.com)
+
+Modified by: [Megan Garwood](http://www.megangarwood.com)
 
 
 ## Easy Google Fonts
