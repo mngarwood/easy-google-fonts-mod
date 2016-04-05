@@ -406,6 +406,14 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 					continue;
 				}
 
+				if ( $key == 'font_hover_color' ) {
+					$output .= "<style id='tt-font-{$id}-{$property['property']}' type='text/css'>{$selector}:hover, {$selector}:focus {";
+					$output .= "{$property['property']}: {$option[ $key ]}{$importance}; ";
+					$output .= '}</style>';
+					
+					continue;
+				}
+
 				// Open <style> tag.
 				$output .= "<style id='tt-font-{$id}-{$property['property']}' type='text/css'>{$selector} {";
 
