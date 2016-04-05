@@ -1,3 +1,8 @@
+=== Modified Easy Google Fonts plugin ===
+Find all information on the original EGF plugin below. This version has been modified to allow some additional customizations by theme developers.
+Modified by: [mngarwood](http://www.megangarwood.com)
+
+
 === Easy Google Fonts ===
 Contributors: sunny_johal, amit_kayasth
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=28M8NWPHVQNYU
