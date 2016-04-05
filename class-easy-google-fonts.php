@@ -10,11 +10,11 @@
  * activated/deactivated.
  *
  * @package   Easy_Google_Fonts
- * @author    Sunny Johal - Titanium Themes <support@titaniumthemes.com>
+ * @author    Sunny Johal - Titanium Themes <support@titaniumthemes.com>, modified by Megan Garwood
  * @license   GPL-2.0+
  * @link      http://wordpress.org/plugins/easy-google-fonts/
  * @copyright Copyright (c) 2014, Titanium Themes
- * @version   1.3.9
+ * @version   1.3.10
  * 
  */
 if ( ! class_exists( 'Easy_Google_Fonts' ) ) :
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Easy_Google_Fonts' ) ) :
 		 * @var      string
 		 * @since 	 1.3
 		 */
-		const VERSION = '1.3.5';
+		const VERSION = '1.3.10';
 
 		/**
 		 * Instance of this class.
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Easy_Google_Fonts' ) ) :
 		 * @since    1.3
 		 *
 		 */
-		public $plugin_slug = 'easy-google-fonts';
+		public $plugin_slug = 'easy-google-fonts-mod';
 
 		/**
 		 * Constructor Function
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Easy_Google_Fonts' ) ) :
 		 */
 		function __construct() {
 
-			$this->plugin_slug = 'easy-google-fonts';
+			$this->plugin_slug = 'easy-google-fonts-mod';
 			$this->register_actions();		
 			$this->register_filters();
 		}
