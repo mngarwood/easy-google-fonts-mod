@@ -47,7 +47,7 @@ if ( ! class_exists( 'EGF_Register_Options' ) ) :
 		 * @since    1.2
 		 *
 		 */
-		public static $slug = 'easy-google-fonts';
+		public static $slug = 'easy-google-fonts-mod';
 
 		/**
 		 * Validation Flag
@@ -179,6 +179,7 @@ if ( ! class_exists( 'EGF_Register_Options' ) ) :
 					'font_id',
 					'font_name',
 					'font_color',
+					'font_hover_color',
 					'font_weight',
 					'font_style',
 					'font_weight_style',
@@ -573,6 +574,7 @@ if ( ! class_exists( 'EGF_Register_Options' ) ) :
 						'font_id'                    => '',
 						'font_name'                  => '',
 						'font_color'                 => '',
+						'font_hover_color'			 => '',
 						'font_weight'                => '',
 						'font_style'                 => '',
 						'font_weight_style'          => '',

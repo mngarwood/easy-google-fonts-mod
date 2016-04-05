@@ -208,6 +208,7 @@
 				'setTextDecoration',
 				'setTextTransform',
 				'setFontColor',
+				'setFontHoverColor',
 				'setBackgroundColor',
 				'createSliderControl',
 				'createColorControl',
@@ -293,6 +294,7 @@
 			var control = this;
 			control.setupFontSearch();
 			control.setFontColor();
+			control.setFontHoverColor();
 			control.setBackgroundColor();
 			control.setupFontSizeSlider();
 			control.setupLineHeightSlider();
@@ -354,6 +356,7 @@
 
 			// Send the updated property to the previewer.
 			_.each( propertyObj, function( value, key ) {
+				// console.log( value + ' ' + key );
 				api.previewer.send( 'tt_font_theme_options[' + id + '][' + key + ']', value );
 			});
 			
@@ -705,6 +708,26 @@
 			this.createColorControl( 
 				'.egf-font-color-container',
 				'font_color'
+			);
+		},
+
+		/**
+		 * Set Font Hover Color
+		 *
+		 * @description - Initialises an iris color picker 
+		 *     and sets the font hover color for this font 
+		 *     control based on the users selection.
+		 *     
+		 * @param {object} e - Event object.
+		 *
+		 * @since 1.3.4
+		 * @version 1.3.9
+		 * 
+		 */
+		setFontHoverColor: function(e) {
+			this.createColorControl( 
+				'.egf-font-hover-color-container',
+				'font_hover_color'
 			);
 		},
 

@@ -261,9 +261,7 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 					<?php echo $this->generate_customizer_css( $options[ $key ], $default_options[ $key ]['properties']['selector'], $key, $force_styles ); ?>
 				<?php else : ?>
 					<?php if ( ! empty( $default_options[ $key ] ) ) : ?>
-						<?php echo $default_options[ $key ]['properties']['selector']; ?> {
-							<?php echo $this->generate_css( $options[ $key ], $force_styles ); ?>
-						}
+						<?php echo $this->generate_css( $options[ $key ], $default_options[ $key ]['properties']['selector'], $force_styles ); ?>
 					<?php endif; ?>			
 				<?php endif; ?>
 			<?php endforeach; ?>
@@ -287,8 +285,9 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 		 * @version 1.3.9
 		 * 
 		 */
-		public function generate_css( $option, $force_styles = false ) {
-			$output     = '';
+		public function generate_css( $option, $selector, $force_styles = false ) {
+			$output     = $selector . ' { ';
+			$output_append_at_end = '';
 			$importance = $force_styles ? '!important' : '';
 			$properties = $this->get_css_properties();
 			
@@ -322,15 +321,26 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 					continue;
 				}
 
+				if ( $id == 'font_hover_color' ) {
+					$output_append_at_end .= $selector . ':hover, ' . $selector . ':focus { ';
+					$output_append_at_end .= "{$property['property']}: {$option[ $id ]}{$importance}; ";
+					$output_append_at_end .= '}';
+					continue;
+				}
+
 				// Handle all other options.
 				if ( $property['has_units'] ) {
 					$output .= "{$property['property']}: {$option[ $id ]['amount']}{$option[ $id ]['unit']}{$importance}; ";
 				} else if ( 'font-family' == $property['property'] ) {
 					$output .= "{$property['property']}: '{$option[ $id ]}'{$importance}; ";
-				} else {
+				}  else {
 					$output .= "{$property['property']}: {$option[ $id ]}{$importance}; ";
 				}
 			}
+
+			$output .= '}' . PHP_EOL;
+
+			$output .= $output_append_at_end;
 
 			// Return output
 			return $output;
@@ -435,6 +445,7 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 				'background_color'           => array( 'property' => 'background-color',           'has_units' => false ),
 				'display'                    => array( 'property' => 'display',                    'has_units' => false ),
 				'font_color'                 => array( 'property' => 'color',                      'has_units' => false ),
+				'font_hover_color'			 => array( 'property' => 'color', 'has_units' => false ),
 				'font_name'                  => array( 'property' => 'font-family',                'has_units' => false ),
 				'font_size'                  => array( 'property' => 'font-size',                  'has_units' => true ),
 				'font_style'                 => array( 'property' => 'font-style',                 'has_units' => false ),

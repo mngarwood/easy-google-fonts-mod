@@ -48,7 +48,7 @@ if ( ! class_exists( 'EGF_Customize_Manager' ) ) :
 		 * @since    1.3
 		 *
 		 */
-		public static $slug = 'easy-google-fonts';
+		public static $slug = 'easy-google-fonts-mod';
 
 		/**
 		 * Constructor Function
@@ -62,7 +62,7 @@ if ( ! class_exists( 'EGF_Customize_Manager' ) ) :
 		 */
 		function __construct() {
 
-			$this->plugin_slug = 'easy-google-fonts';
+			$this->plugin_slug = 'easy-google-fonts-mod';
 			$this->include_control_class();
 
 			/**

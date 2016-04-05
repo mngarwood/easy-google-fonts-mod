@@ -73,6 +73,7 @@
 
 					// Appearance preview elements.
 					preview.setFontColor( id, selector, importance );
+					preview.setFontHoverColor( id, selector, importance );
 					preview.setBackgroundColor( id, selector, importance );
 					preview.setFontSize( id, selector, importance );
 					preview.setLineHeight( id, selector, importance );
@@ -313,6 +314,32 @@
 			'tt_font_theme_options[' + id + '][font_color]',
 			'tt-font-' + id + '-color',
 			selector,
+			'color',
+			importance
+		);
+	};
+
+	/**
+	 * Set Font Hover Color
+	 *
+	 * @description - Sets the font hover color css property for
+	 *     the selectors passed in the parameter and injects
+	 *     the styles into the <head> of the page.
+	 * 
+	 * @param {string} 	id         	Control ID.
+	 * @param {string} 	selector   	Selector managed by this font control.
+	 * @param {string} 	importance 	Whether to force styles using !important.
+	 *
+	 * @since 1.3.4
+	 * @version 1.3.9
+	 * 
+	 */
+	preview.setFontHoverColor = function( id, selector, importance ) {
+		// console.log( id + ' ' + selector + ' ' + importance );
+		preview.setStyle(
+			'tt_font_theme_options[' + id + '][font_hover_color]',
+			'tt-font-' + id + '-hover-color',
+			selector + ':hover, ' + selector + ':focus',
 			'color',
 			importance
 		);

@@ -265,7 +265,7 @@ if ( ! class_exists( 'Easy_Google_Fonts_Admin' ) ) :
 			 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 			 */
 			$this->plugin_screen_hook_suffix = add_options_page(
-				__( 'Easy Google Fonts', $this->plugin_slug ),
+				__( 'Easy Google Fonts Mod', $this->plugin_slug ),
 				__( 'Google Fonts', $this->plugin_slug ),
 				'edit_theme_options',
 				$this->plugin_slug,
