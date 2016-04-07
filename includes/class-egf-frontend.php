@@ -321,7 +321,7 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 					continue;
 				}
 
-				if ( $id == 'font_hover_color' ) {
+				if ( $id == 'font_hover_color' || $id == 'background_hover_color' ) {
 					$output_append_at_end .= $selector . ':hover, ' . $selector . ':focus { ';
 					$output_append_at_end .= "{$property['property']}: {$option[ $id ]}{$importance}; ";
 					$output_append_at_end .= '}';
@@ -406,7 +406,7 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 					continue;
 				}
 
-				if ( $key == 'font_hover_color' ) {
+				if ( $key == 'font_hover_color' || $key == 'background_hover_color' ) {
 					$output .= "<style id='tt-font-{$id}-{$property['property']}' type='text/css'>{$selector}:hover, {$selector}:focus {";
 					$output .= "{$property['property']}: {$option[ $key ]}{$importance}; ";
 					$output .= '}</style>';
@@ -451,6 +451,7 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 		public function get_css_properties() {		
 			$properties = array( 
 				'background_color'           => array( 'property' => 'background-color',           'has_units' => false ),
+				'background_hover_color'	 => array( 'property' => 'background-color', 'has_units' => false ),
 				'display'                    => array( 'property' => 'display',                    'has_units' => false ),
 				'font_color'                 => array( 'property' => 'color',                      'has_units' => false ),
 				'font_hover_color'			 => array( 'property' => 'color', 'has_units' => false ),

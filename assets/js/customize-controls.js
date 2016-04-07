@@ -210,6 +210,7 @@
 				'setFontColor',
 				'setFontHoverColor',
 				'setBackgroundColor',
+				'setBackgroundHoverColor',
 				'createSliderControl',
 				'createColorControl',
 				'setupFontSizeSlider',
@@ -296,6 +297,7 @@
 			control.setFontColor();
 			control.setFontHoverColor();
 			control.setBackgroundColor();
+			control.setBackgroundHoverColor();
 			control.setupFontSizeSlider();
 			control.setupLineHeightSlider();
 			control.setupLetterSpacingSlider();
@@ -748,6 +750,26 @@
 			this.createColorControl( 
 				'.egf-background-color-container',
 				'background_color'
+			);
+		},
+
+		/**
+		 * Set Background Hover Color
+		 *
+		 * @description - Initialises an iris color picker 
+		 *     and sets the background color for this font 
+		 *     control based on the users selection.
+		 *     
+		 * @param {object} e - Event object.
+		 *
+		 * @since 1.3.4
+		 * @version 1.3.9
+		 * 
+		 */
+		setBackgroundHoverColor: function(e) {
+			this.createColorControl( 
+				'.egf-background-hover-color-container',
+				'background_hover_color'
 			);
 		},
 

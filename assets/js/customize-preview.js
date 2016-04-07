@@ -75,6 +75,7 @@
 					preview.setFontColor( id, selector, importance );
 					preview.setFontHoverColor( id, selector, importance );
 					preview.setBackgroundColor( id, selector, importance );
+					preview.setBackgroundHoverColor( id, selector, importance );
 					preview.setFontSize( id, selector, importance );
 					preview.setLineHeight( id, selector, importance );
 					preview.setLetterSpacing( id, selector, importance );
@@ -365,6 +366,31 @@
 			'tt_font_theme_options[' + id + '][background_color]',
 			'tt-font-' + id + '-background-color',
 			selector,
+			'background-color',
+			importance
+		);
+	};
+
+	/**
+	 * Set Background Hover Color
+	 *
+	 * @description - Sets the background hover color css property for
+	 *     the selectors passed in the parameter and injects
+	 *     the styles into the <head> of the page.
+	 * 
+	 * @param {string} 	id         	Control ID.
+	 * @param {string} 	selector   	Selector managed by this font control.
+	 * @param {string} 	importance 	Whether to force styles using !important.
+	 *
+	 * @since 1.3.4
+	 * @version 1.3.9
+	 * 
+	 */
+	preview.setBackgroundHoverColor = function( id, selector, importance ) {
+		preview.setStyle(
+			'tt_font_theme_options[' + id + '][background_hover_color]',
+			'tt-font-' + id + '-background-hover-color',
+			selector + ':hover, ' + selector + ':focus',
 			'background-color',
 			importance
 		);

@@ -236,13 +236,15 @@
 ----------------------------------*/
 .egf-font-color-container,
 .egf-font-hover-color-container,
-.egf-background-color-container {
+.egf-background-color-container,
+.egf-background-hover-color-container {
 	margin-bottom: 5px;
 }
 
 .egf-font-color-container input.wp-color-picker,
 .egf-font-hover-color-container input.wp-color-picker,
 .egf-background-color-container input.wp-color-picker,
+.egf-background-hover-color-container input.wp-color-picker,
 .egf-border-top-controls input.wp-color-picker,
 .egf-border-bottom-controls input.wp-color-picker,
 .egf-border-left-controls input.wp-color-picker,
@@ -257,7 +259,9 @@
 .egf-font-hover-color-container .wp-picker-clear,
 .egf-font-hover-color-container .wp-picker-default,
 .egf-background-color-container .wp-picker-clear,
-.egf-background-color-container .wp-picker-default 
+.egf-background-color-container .wp-picker-default,
+.egf-background-hover-color-container .wp-picker-clear,
+.egf-background-hover-color-container .wp-picker-default,  
 .egf-border-top-controls .wp-picker-clear,
 .egf-border-top-controls .wp-picker-default,
 .egf-border-bottom-controls .wp-picker-clear,

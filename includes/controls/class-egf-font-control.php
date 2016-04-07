@@ -218,6 +218,7 @@ if ( ! class_exists( 'EGF_Font_Control' ) && class_exists( 'WP_Customize_Control
 			include( "{$path}/font-color.php" );
 			include( "{$path}/font-hover-color.php" );
 			include( "{$path}/background-color.php" );
+			include( "{$path}/background-hover-color.php" );
 			include( "{$path}/font-size.php" );
 			include( "{$path}/line-height.php" );
 			include( "{$path}/letter-spacing.php" );		
