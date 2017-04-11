@@ -87,6 +87,8 @@ if ( ! class_exists( 'EGF_Ajax' ) ) :
 		 */
 		public function register_actions() {
 			add_action( 'wp_ajax_tt_font_set_google_api_key', array( $this, 'set_google_api_key' ) );
+			add_action( 'wp_ajax_tt_font_set_license_key', array( $this, 'set_license_key' ) );
+			add_action( 'wp_ajax_tt_font_remove_license_key', array( $this, 'remove_license_key' ) );
 			add_action( 'wp_ajax_tt_font_control_force_styles', array( $this, 'force_font_control_styles' ) );
 			add_action( 'wp_ajax_tt_font_create_control_instance', array( $this, 'create_control_instance' ) );
 			add_action( 'wp_ajax_tt_font_update_control_instance', array( $this, 'update_control_instance' ) );
@@ -135,6 +137,76 @@ if ( ! class_exists( 'EGF_Ajax' ) ) :
 			EGF_Font_Utilities::delete_font_transients(); 
 
 			wp_die();
+		}
+
+		/**
+		 * Set License Key - Ajax Function
+		 * 
+		 * Checks WordPress nonce and upon successful validation
+		 * updates/activates the license key.
+		 *
+		 * @since 1.2
+		 * @version 1.3.9
+		 * 
+		 */
+		public function set_license_key() {
+			// Check admin nonce for security
+			check_ajax_referer( 'tt_font_edit_control_instance', 'tt_font_edit_control_instance_nonce' );
+
+			// Make sure user has the required access level
+			if ( ! current_user_can( 'edit_theme_options' ) ) {
+				wp_die( -1 );
+			}
+
+			if ( isset( $_POST['licenseKey'] ) ) {
+				$licenseKey = esc_attr( $_POST['licenseKey'] );
+				$plugin = Easy_Google_Fonts::get_instance();
+				$plugin->set_license_key( $licenseKey );
+				$status = $plugin->activate_license_key();
+			}
+
+			if ( isset( $status ) && ! empty( $status ) ) {
+
+				echo $status;
+
+			}
+				
+			wp_die();
+
+			
+		}
+
+		/**
+		 * Remove License Key - Ajax Function
+		 * 
+		 * Checks WordPress nonce and upon successful validation
+		 * removes/deactivates the license key.
+		 *
+		 * @since 1.2
+		 * @version 1.3.9
+		 * 
+		 */
+		public function remove_license_key() {
+			// Check admin nonce for security
+			check_ajax_referer( 'tt_font_edit_control_instance', 'tt_font_edit_control_instance_nonce' );
+
+			// Make sure user has the required access level
+			if ( ! current_user_can( 'edit_theme_options' ) ) {
+				wp_die( -1 );
+			}
+
+			$plugin = Easy_Google_Fonts::get_instance();
+			$status = $plugin->deactivate_license_key();
+
+			if ( isset( $status ) && ! empty( $status ) ) {
+
+				echo $status;
+
+			} 
+				
+			wp_die();
+
+			
 		}
 
 		/**

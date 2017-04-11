@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Easy Google Fonts Modified
  * Description: Modified version of the original EGF plugin to allow more dev customization
- * Version: 1.0.0
+ * Version: 1.4.0
  * Author: Megan Garwood
  * Author URI: http://www.megangarwood.com
  * License: GPL2
@@ -55,6 +55,10 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/customizer/class-egf-custo
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-egf-admin-controller.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-egf-ajax.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-egf-frontend.php' );
+if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
+	// load our custom updater if it doesn't already exist 
+	include( plugin_dir_path( __FILE__ ) . '/includes/EDD_SL_Plugin_Updater.php' );
+}
 
 /**
  * Load Plugin Text Domain

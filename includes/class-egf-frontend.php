@@ -290,7 +290,8 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 			$output_append_at_end = '';
 			$importance = $force_styles ? '!important' : '';
 			$properties = $this->get_css_properties();
-			
+
+
 			/**
 			 * Output CSS Styles
 			 *
@@ -322,9 +323,33 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 				}
 
 				if ( $id == 'font_hover_color' || $id == 'background_hover_color' ) {
-					$output_append_at_end .= $selector . ':hover, ' . $selector . ':focus { ';
-					$output_append_at_end .= "{$property['property']}: {$option[ $id ]}{$importance}; ";
-					$output_append_at_end .= '}';
+					$selector_array = explode( ',', $selector );
+                    $count = count($selector_array);
+
+					if ( $count > 1 ) {
+
+					    for ( $i = 0; $i < $count; $i++ ) {
+
+							$output_append_at_end .= $selector_array[$i] . ':hover, ' . $selector_array[$i] . ':focus';
+
+							if ( $i !== ($count - 1) ) {
+							    $output_append_at_end .= ', ';
+							}
+
+						}
+
+                        $output_append_at_end .= ' { ';
+                        $output_append_at_end .= "{$property['property']}: {$option[ $id ]}{$importance}; ";
+                        $output_append_at_end .= '}';
+					    
+                    } else {
+						
+					    $output_append_at_end .= $selector . ':hover, ' . $selector . ':focus { ';
+						$output_append_at_end .= "{$property['property']}: {$option[ $id ]}{$importance}; ";
+						$output_append_at_end .= '}';
+						
+                    }
+				    
 					continue;
 				}
 
@@ -407,10 +432,34 @@ if ( ! class_exists( 'EGF_Frontend' ) ) :
 				}
 
 				if ( $key == 'font_hover_color' || $key == 'background_hover_color' ) {
-					$output .= "<style id='tt-font-{$id}-{$property['property']}' type='text/css'>{$selector}:hover, {$selector}:focus {";
-					$output .= "{$property['property']}: {$option[ $key ]}{$importance}; ";
-					$output .= '}</style>';
-					
+					$selector_array = explode( ',', $selector );
+					$count = count($selector_array);
+
+					$output .= "<style id='tt-font-{$id}-{$property['property']}' type='text/css'>";
+
+					if ( $count > 1 ) {
+
+						for ( $i = 0; $i < $count; $i++ ) {
+
+							$output .= $selector_array[$i] . ':hover, ' . $selector_array[$i] . ':focus';
+
+							if ( $i !== ($count - 1) ) {
+								$output .= ', ';
+							}
+
+						}
+
+						$output .= "{$property['property']}: {$option[ $key ]}{$importance}; ";
+						$output .= '}</style>';
+
+					} else {
+
+						$output .= "<style id='tt-font-{$id}-{$property['property']}' type='text/css'>{$selector}:hover, {$selector}:focus {";
+						$output .= "{$property['property']}: {$option[ $key ]}{$importance}; ";
+						$output .= '}</style>';
+
+					}
+
 					continue;
 				}
 

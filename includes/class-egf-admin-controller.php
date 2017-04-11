@@ -45,6 +45,7 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 		protected $create_url;
 		protected $manage_url;
 		protected $advanced_url;
+		protected $license_url;
 
 		/**
 		 * Variables to keep track of current screen state
@@ -56,6 +57,7 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 		protected $is_create_screen;
 		protected $is_manage_screen;
 		protected $is_advanced_screen;
+		protected $is_license_screen;
 
 		/**
 		 * Variables to keep track of the font control 
@@ -136,6 +138,7 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 			$this->manage_url   = esc_url( add_query_arg( array( 'screen' => 'manage_controls' ), $this->admin_url ) );
 			$this->advanced_url = esc_url( add_query_arg( array( 'screen' => 'advanced' ), $this->admin_url ) );
 			$this->create_url   = esc_url( add_query_arg( array( 'screen' => 'edit_controls', 'action' => 'create' ), $this->admin_url ) );
+			$this->license_url = esc_url( add_query_arg( array( 'screen' => 'license' ), $this->admin_url ) );
 		}
 		
 		/**
@@ -231,6 +234,7 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 			$this->is_create_screen   = false;
 			$this->is_manage_screen   = false;
 			$this->is_advanced_screen = false;
+			$this->is_license_screen  = false;
 
 			// Determine Screen
 			if ( isset( $_GET['screen'] ) ) {
@@ -247,10 +251,14 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 					case 'advanced':
 						$this->is_advanced_screen = true;
 						break;
+
+					case 'license':
+						$this->is_license_screen = true;
+						break;
 				}
 			}
 
-			if ( ! $this->is_manage_screen && ! $this->is_advanced_screen ) {
+			if ( ! $this->is_manage_screen && ! $this->is_advanced_screen && ! $this->is_license_screen ) {
 				// Determine Screen via $_GET['action']
 				$action = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : false;
 
@@ -393,6 +401,22 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 			return $this->is_advanced_screen;
 		}
 
+		/**
+		 * License Screen Check
+		 *
+		 * Boolean function to check if we are currently
+		 * on the License Screen.
+		 * 
+		 * @return boolean true
+		 * 
+		 * @since 1.2
+		 * @version 1.3.9
+		 * 
+		 */
+		public function is_license_screen() {
+			return $this->is_license_screen;
+		}
+
 		
 		/**
 		 * Get Page Container Opening Markup
@@ -471,6 +495,18 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 			include_once( plugin_dir_path( dirname(__FILE__) ) . 'views/admin-page/advanced-screen.php' );
 		}
 
+		public function get_license_screen () {
+			$plugin = Easy_Google_Fonts::get_instance();
+			$license_key = $plugin->get_license_key();
+			if ( $license_key != null ) {
+				$validity = $plugin->is_valid_license_key( $license_key ) ? 'valid-key' : 'invalid-key';
+			} else {
+				$validity = 'invalid-key';
+			}
+			
+			include_once( plugin_dir_path( dirname(__FILE__) ) . 'views/admin-page/license-screen.php' );
+		}
+
 
 		/**
 		 * Render Admin Page Output
@@ -506,6 +542,10 @@ if ( ! class_exists( 'EGF_Admin_Controller' ) ) :
 
 			if ( $this->is_advanced_screen() ) {
 				$this->get_advanced_screen();
+			}
+
+			if ( $this->is_license_screen() ) {
+				$this->get_license_screen();
 			}
 
 			// Closing container markup

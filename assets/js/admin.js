@@ -58,6 +58,7 @@
 			api.registerEditEvents();
 			api.registerManagementEvents();
 			api.registerAdvancedEvents();
+			api.registerLicenseEvents();
 			api.unregisterChange();
 			// Add unload event	
 			$(window).on( 'beforeunload', function() {
@@ -322,6 +323,46 @@
 				var redirectUrl = $( '#save_api_key' ).data( 'redirect-url' );
 				callback( redirectUrl );
 			});			
+		};
+
+		api.updateLicenseKey = function( licenseKey, processMethod, callback ) {
+			api.unregisterChange();
+			
+			processMethod = processMethod || function(){};
+			callback      = callback || function(){};
+			var nonce     = $( '#tt_font_edit_control_instance_nonce' ).val();
+
+			var dataObj = {
+				'action': 'tt_font_set_license_key',
+				'licenseKey': licenseKey,
+				'tt_font_edit_control_instance_nonce' : nonce
+			};
+
+			$.post( ajaxurl, dataObj, function() {
+				processMethod();
+			}).done( function( data ) {
+				var redirectUrl = $( '#save_license_key' ).data( 'redirect-url' );
+				callback( redirectUrl, data );
+			});			
+		};
+
+		api.removeLicenseKey = function ( processMethod, callback ) {
+
+			processMethod = processMethod || function () {};
+			callback = callback || function () {};
+			var nonce = $('#tt_font_edit_control_instance_nonce').val();
+
+			var dataObj = {
+				'action': 'tt_font_remove_license_key',
+				'tt_font_edit_control_instance_nonce': nonce
+			};
+
+			$.post( ajaxurl, dataObj, function () {
+				processMethod();
+			}).done( function ( data ) {
+				var redirectUrl = $('#remove_license_key').data('redirect-url');
+				callback( redirectUrl, data );
+			});
 		};
 		
 		/**
@@ -659,6 +700,79 @@
 				spinner.fadeIn();
 
 				api.updateGoogleApiKey( apiKey, processMethod, callback );
+
+				return false;
+			});
+
+		};
+
+		/**
+		 * Register License Events
+		 *
+		 * @description - Registers all event handlers that
+		 *     exist on the License page.
+		 * 
+		 * @since 1.2
+		 * @version 1.3.9
+		 * 
+		 */
+		api.registerLicenseEvents = function() {
+			
+			var container = $( '.manage-license-key' );
+			var spinner   = $( '.spinner' );
+			
+			$( '#license-key' ).on( 'change', function() {
+				api.registerChange();
+			});
+
+			$( '#save_license_key' ).on( 'click', function() {
+				var licenseKey      = $( '#license-key' ).val();
+				var redirectUrl = $(this).data( 'redirect-url' );
+
+				var processMethod = function() {};
+				var callback      = function( redirectUrl, data ) {
+					
+					if ( data ) {
+						$('.key-feedback span').text(data);
+					}
+
+					// Fade out spinner and redirect user
+					spinner.fadeOut(200);
+
+					if ( !data ) {
+						$('.manage-license-key').removeClass('invalid-key').addClass('valid-key');
+						$('.key-feedback span').text('Your license key is valid and automatic updates are enabled.');
+						// window.location = redirectUrl;
+					}
+				};
+
+				spinner.fadeIn();
+
+				api.updateLicenseKey( licenseKey, processMethod, callback );
+
+				return false;
+			});
+
+			$('#remove_license_key').on( 'click', function () {
+				var redirectUrl = $(this).data('redirect-url');
+
+				var processMethod = function() {};
+				var callback = function ( redirectUrl, data ) {
+					if ( data ) {
+						$('.key-feedback span').text(data);
+					}
+
+					// Fade out spinner and redirect user
+					spinner.fadeOut(200);
+
+					if ( !data ) {
+						window.location = redirectUrl;
+					}
+				};
+
+				spinner.fadeIn();
+
+				api.removeLicenseKey( processMethod, callback );
 
 				return false;
 			});

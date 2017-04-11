@@ -367,38 +367,48 @@ ul.tagit input[type="text"] {
  * @version 1.1.1
  * 
  */
-#google-api-key {
+#google-api-key,
+#license-key {
     width: 225px;
 }
 
-.manage-controls.manage-google-key {
+.manage-controls.manage-google-key,
+.manage-controls.manage-license-key {
     width: 230px;
     margin-bottom: 20px;
 }
 
-.manage-controls.manage-google-key.valid-key {
+.manage-controls.manage-google-key.valid-key,
+.manage-controls.manage-license-key.valid-key {
     background: #dff0d8;
     border-color: #d6e9c6;
 }
-.manage-controls.manage-google-key.valid-key p {
+.manage-controls.manage-google-key.valid-key p
+.manage-controls.manage-license-key.valid-key p {
     color: #468847;
 }
 
-.manage-controls.manage-google-key.valid-key .invalid-key {
+.manage-controls.manage-google-key.valid-key .invalid-key,
+.manage-controls.manage-license-key.valid-key .invalid-key {
     display: none;
 }
 
-.manage-controls.manage-google-key.invalid-key .valid-key {
+.manage-controls.manage-google-key.invalid-key .valid-key,
+.manage-controls.manage-license-key.invalid-key .valid-key {
     display: none;
 }
 
-.manage-controls.manage-google-key.loading {
+.manage-controls.manage-google-key.loading,
+.manage-controls.manage-license-key.loading {
     width: 265px
 }
 .spinner.spinner-left {
     float:left;
+    visibility: visible;
+    display: none;
 }
-#save_api_key {
+#save_api_key
+#save_license_key {
     float: left;
 }
 

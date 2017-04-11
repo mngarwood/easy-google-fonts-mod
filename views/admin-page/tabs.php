@@ -10,4 +10,6 @@
 		<a href="<?php echo $this->advanced_url; ?>" class="nav-tab <?php if ( $this->is_advanced_screen() ) { echo 'nav-tab-active'; } ?>">
 			<?php esc_html_e( 'Advanced', 'theme-translate' ); ?>
 		</a>
+		<a href="<?php echo $this->license_url; ?>" class="nav-tab <?php if ( $this->is_license_screen() ) { echo 'nav-tab-active'; } ?>"><?php esc_html_e( 'License', 'theme-translate' ); ?>
+		</a>
 	</h2>
